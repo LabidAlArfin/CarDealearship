@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Date {
+    int day, month, year;
+    Date(int d, int m, int y) : day(d), month(m), year(y) {};
+};
+
+class Car {
+private:
+    int id;
+    string brand, type;
+    Date makeDate, rentDate, returnDate;
+public:
+    // Getters and setters
+    void setID(int id) { this->id = id; }
+    void setBrand(const string& brand) { this->brand = brand; }
+    void setType(const string& type) { this->type = type; }
+    void setDate(const Date& makeDate) { this->makeDate = makeDate; }
+    void setRentDate(const Date& rentDate) { this->rentDate = rentDate; }
+    void setReturnDate(const Date& returnDate) { this->returnDate = returnDate; }
+
+    int getID() const { return id; }
+    const string& getBrand() const { return brand; }
+    const string& getType() const { return type; }
+    const Date& getDate() const { return makeDate; }
+    const Date& getRentDate() const { return rentDate; }
+    const Date& getReturnDate() const { return returnDate; }
+};
+
+int main() {
+    // Create an array of Car objects
+    const int maxCars = 10;
+    Car cars[maxCars];
+    int numCars = 0;
+
+    // Menu options
+    int choice = 0;
+    while (choice != 3) {
+        cout << "Menu:" << endl;
+        cout << "1. Add a car" << endl;
+        cout << "2. Display available cars" << endl;
+        cout << "3. Quit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1: {
+            // Add a car
+            if (numCars < maxCars) {
+                int id, day, month, year;
+                string brand, type;
+
+                cout << "Enter car ID: ";
+                cin >> id;
+                cars[numCars].setID(id);
+
+                cout << "Enter car brand: ";
+                cin >> brand;
+                cars[numCars].setBrand(brand);
+
+                cout << "Enter car type: ";
+                cin >> type;
+                cars[numCars].setType(type);
+
+                cout << "Enter make date (day month year): ";
+                cin >> day >> month >> year;
+                cars[numCars].setDate(Date(day, month, year));
+
+                cout << "Enter rental date (day month year): ";
+                cin >> day >> month >> year;
+                cars[numCars].setRentDate(Date(day, month, year));
+
+                cout << "Enter return date (day month year): ";
+                cin >> day >> month >> year;
+                cars[numCars].setReturnDate(Date(day, month, year));
+
+                numCars++;
+
+                cout << "Car added successfully!" << endl;
+            }
+            else {
+                cout << "Cannot add more cars. Maximum limit reached." << endl;
+            }
+            break;
+        }
+        case 2: {
+            // Display available cars
+            cout << "Available Cars:" << endl;
+            for (int i = 0; i < numCars; i++) {
+                cout << "ID: " << cars[i].getID() << ", Brand: " << cars[i].getBrand() << ", Type: " << cars[i].getType() << endl;
+            }
+            break;
+        }
+        case 3:
+            // Quit the program
+            cout << "Exiting the program." << endl;
+            break;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+            break;
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}

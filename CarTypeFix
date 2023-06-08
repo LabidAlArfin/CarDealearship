@@ -1,0 +1,131 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include "Car.h"
+
+using namespace std;
+
+int limit_days;
+
+class LuxuryCar : public Car {
+private:
+    int days_booked;
+    bool isAvailable;
+    vector<LuxuryCar> cars;
+
+public:
+    // Default constructor
+    LuxuryCar()
+        : Car(), days_booked(0), isAvailable(true) {}
+
+    // Parameterized constructor
+    LuxuryCar(int id, const string& name, const string& type, const Date& makeDate, const Date& rentDate,
+        const Date& returnDate, float mileage, float pricing, int days_booked, bool isAvailable)
+        : Car(id, name, type, makeDate, rentDate, returnDate, mileage, pricing),
+        days_booked(days_booked),
+        isAvailable(isAvailable) {
+    }
+
+    static vector<LuxuryCar> readFile() {
+        vector<LuxuryCar> cars;
+        ifstream file("CarInfo.txt");
+        if (!file) {
+            cout << "Failed to open the file." << endl;
+            return cars;
+        }
+
+        string line;
+        getline(file, line); // Read the header line
+
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string brand, type, year, mileage, price, available, id;
+
+            ss >> brand >> type >> year >> mileage >> price >> available >> id;
+
+            int idVal = stoi(id);
+            string model = brand.substr(brand.find('-') + 1); // Parse model from brand
+            brand = brand.substr(0, brand.find('-')); // Parse brand from brand
+
+            int yearVal = stoi(year);
+            float mileageVal = stof(mileage);
+            float priceVal = stof(price);
+            bool isAvailable = (available == "1");
+
+            Date makeDate(1, 1, yearVal); // Assume make date is 1/1/{year}
+            Date rentDate(2, 6, 2023); // Default rent date
+            Date returnDate(2, 6, 2023); // Default return date
+
+            LuxuryCar car(idVal, brand, type, makeDate, rentDate, returnDate, mileageVal, priceVal, 0, isAvailable);
+            cars.push_back(car);
+        }
+
+        return cars;
+    }
+
+    void printFile() {
+        ofstream outputFile("LuxuryCars.txt");
+
+        if (outputFile.is_open()) {
+            // Print header
+            outputFile << "Name\t\t\tType\tYear\tTotal Mileage\tRent Price\tAvailable\tID\n";
+
+            // Print car information
+            for (int i = 0; i < cars.size(); i++) {
+                outputFile << cars[i].getBrand() << "\t" << cars[i].getType() << "\t"
+                    << cars[i].getYear() << "\t" << cars[i].getMileage() << "\t\t"
+                    << cars[i].getPrice() << "\t\t" << cars[i].isAvailable << "\t\t"
+                    << cars[i].getID() << "\n";
+            }
+
+            outputFile.close();
+            cout << "Luxury cars information printed to file: LuxuryCars.txt" << endl;
+        }
+        else {
+            cout << "Unable to open the file for printing." << endl;
+        }
+    }
+
+    int FindCarUsingName(const string& name) {
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars[i].getBrand() == name && cars[i].getType() == "Luxury") {
+                if (cars[i].isAvailable) {
+                    return i;
+                }
+                else {
+                    cout << "The car is not available for booking." << endl;
+                    return -1;
+                }
+            }
+        }
+
+        cout << "The car does not exist." << endl;
+        return -1;
+    }
+
+    void MakeBooking(const string& name, const Date& rentDate, const Date& returnDate) {
+        int carIndex = FindCarUsingName(name);
+
+        if (carIndex != -1) {
+            LuxuryCar& car = cars[carIndex];
+            car.setRentDate(rentDate);
+            car.setReturnDate(returnDate);
+            car.isAvailable = false;
+            car.days_booked = rentDate.daysUntil(returnDate);
+
+            cout << "Booking successfully made." << endl;
+        }
+    }
+};
+
+int main() {
+    vector<LuxuryCar> cars = LuxuryCar::readFile();
+
+    // Example usage
+    LuxuryCar car;
+    car.MakeBooking("Mercedes-AMG GT", Date(5, 6, 2023), Date(12, 6, 2023));
+    car.printFile();
+
+    return 0;
+}

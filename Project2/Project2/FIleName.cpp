@@ -11,12 +11,12 @@ int main() {
         cout << "Car ID: " << cars[i].getID() << endl;
         cout << "Brand: " << cars[i].getBrand() << endl;
         cout << "Type: " << cars[i].getType() << endl;
-        cout << "Make Date: " << cars[i].getMakeDate().day << "/" << cars[i].getMakeDate().month << "/" << cars[i].getMakeDate().year << endl;
-        cout << "Rent Date: " << cars[i].getRentDate().day << "/" << cars[i].getRentDate().month << "/" << cars[i].getRentDate().year << endl;
-        cout << "Return Date: " << cars[i].getReturnDate().day << "/" << cars[i].getReturnDate().month << "/" << cars[i].getReturnDate().year << endl;
-        cout << "Mileage: " << cars[i].calculateMileage() << endl;
-        cout << "Pricing: " << cars[i].calculatePricing() << endl;
-        cout << "Available: " << (cars[i].isAvailable ? "Yes" : "No") << endl;
+        cout << "Make Date: " << cars[i].getMake().day << "/" << cars[i].getMake().month << "/" << cars[i].getMake().year << endl;
+        cout << "Rent Date: " << cars[i].getRentD().day << "/" << cars[i].getRentD().month << "/" << cars[i].getRentD().year << endl;
+        cout << "Return Date: " << cars[i].getReturnD().day << "/" << cars[i].getReturnD().month << "/" << cars[i].getReturnD().year << endl;
+        cout << "Mileage: " << cars[i].calculateMileage(i) << endl;
+        cout << "Pricing: " << cars[i].calculatePricing(i) << endl;
+        cout << "Available: " << (cars[i].getAvailability() ? "Yes" : "No") << endl;
         cout << endl;
     }
 
@@ -30,10 +30,10 @@ int main() {
     // Check if the user input is a number (car ID)
     if (isdigit(input[0])) {
         int carID = stoi(input);
-        index = FindCarByID(carID);
+        index = cars[0].FindCarByID(carID);
     }
     else {
-        index = FindCarUsingName(input);
+        index = cars[0].FindCarUsingName(input);
     }
 
     if (index != -1) {
@@ -49,4 +49,3 @@ int main() {
 
     return 0;
 }
-

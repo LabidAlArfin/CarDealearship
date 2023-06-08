@@ -1,0 +1,50 @@
+Name                    Type         Year    Total Milage    Rent Price    Available
+Merc-Benze S-class      Luxury       2012    32000           75            1
+BMW 3 Series            Economic     2018    165000          60            0
+Audi Q5                 Van          2019    45000           80            1
+Toyota Camry            Economic     2015    120000          50            1
+Honda Civic             Economic     2017    80000           55            0
+Ford Mustang            Sports       2020    25000           90            1
+Chevrolet Tahoe         Van          2016    90000           70            1
+Nissan Altima           Economic     2014    110000          45            0
+Tesla Model S           Luxury       2019    40000           100           1
+Volkswagen Golf         Economic     2017    60000           55            0
+Mercedes-Benz GLE       Van          2020    20000           85            1
+BMW X5                  Van          2018    55000           75            0
+Lexus RX                Van          2015    85000           65            1
+Toyota Corolla          Economic     2016    95000           50            1
+Ford F-150              Economic     2017    70000           80            0
+Hyundai Sonata          Economic     2019    40000           55            1
+Audi A4                 Economic     2018     60000          65            1
+Chevrolet Corvette      Sports       2021     10000          120           0
+Honda CR-V              Van          2017     75000           70            1
+Tesla Model 3           Luxury       2020     30000           95            1
+Volkswagen Jetta        Economic     2016     90000           50            1
+Mercedes-Benz C-class   Economic     2019     35000           70            0
+BMW 5 Series            Economic     2017     55000           75            1
+Lexus ES                Economic     2018     45000           60            1
+Toyota Highlander       Van          2016     80000           75            1
+Ford Explorer           Van          2017     70000           70            0
+Nissan Rogue            Van          2015     90000           55            1
+Tesla Model X           Luxury       2018     35000           110           0
+Audi Q7                 Van          2020     25000           95            1
+Chevrolet Silverado     Economic     2019     40000           90            0
+Honda Accord            Economic     2017     60000           55            0
+Volkswagen Passat       Economic     2016     80000           50            1
+Mercedes-Benz E-class   Economic     2019     35000           75            1
+BMW 7 Series            Economic     2018     50000           85            1
+Lexus GS                Economic     2017     55000           70            0
+Toyota RAV4             Van          2016     75000           65            1
+Ford Edge               Van          2018     45000           60            1
+Nissan Sentra           Economic     2015     90000           45            1
+Tesla Model Y           Luxury       2020     30000           100           0
+Audi A6                 Economic     2018     55000           80            1
+Chevrolet Camaro        Sports       2021     10000           120           0
+Honda Pilot             Van          2017     70000           75            1
+Volkswagen Tiguan       Van          2016     85000           70            0
+Mercedes-Benz A-class   Economic     2019     40000           65            1
+BMW X3                  Van          2018     60000           80            1
+Lexus NX                Van          2017     75000           70            1
+Toyota Avalon           Economic     2016     90000           60            0
+Ford Fusion             Economic     2018     50000           55            0
+Nissan Maxima           Economic     2015     95000           50            0

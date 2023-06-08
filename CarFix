@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Date {
+	int day, month, year;
+	Date(int d, int m, int y) : day(d), month(m), year(y) {};
+};
+
+class Car {
+private:
+	int id;
+	string brand, type;
+	Date makeDate, rentDate, returnDate;
+	float mileage, pricing;
+public:
+	// Getters and setters
+	void setID(int id) { this->id = id; }
+	void setBrand(const string& brand) { this->brand = brand; }
+	void setType(const string& type) { this->type = type; }
+	void setMakeDate(const Date& makeDate) { this->makeDate = makeDate; }
+	void setRentDate(const Date& rentDate) { this->rentDate = rentDate; }
+	void setReturnDate(const Date& returnDate) { this->returnDate = returnDate; }
+
+	int getID() const { return id; }
+	const string& getBrand() const { return brand; }
+	const string& getType() const { return type; }
+	const Date& getMakeDate() const { return makeDate; }
+	const Date& getRentDate() const { return rentDate; }
+	const Date& getReturnDate() const { return returnDate; }
+
+	virtual float calculatePricing() const {
+		// Calculate pricing logic based on make date, rent date, and return date
+		// Replace the example logic with your own calculation formula
+		float pricing = 0.0;
+		int rentalPeriod = calculateDaysPassed(rentDate, returnDate);
+		pricing = rentalPeriod * 50.0; // Example calculation: $50 per day
+		return pricing;
+	}
+
+	virtual float calculateMileage() const {
+		// Calculate mileage logic based on the difference between the make date and return date
+		// Replace the example logic with your own calculation formula
+		float milesPassed = 0.0;
+		int daysPassed = calculateDaysPassed(makeDate, returnDate);
+		milesPassed = daysPassed * 50.0; // Example calculation: 50 miles per day
+		return milesPassed;
+	}
+
+	int calculateDaysPassed(const Date& startDate, const Date& endDate) const {
+		// Calculate the exact number of days between the start and end dates
+		int daysPassed = 0;
+
+		// Convert the dates to days since a reference date
+		int startDays = startDate.day + getDaysInMonth(startDate.month, startDate.year) * startDate.month + 365 * startDate.year;
+		int endDays = endDate.day + getDaysInMonth(endDate.month, endDate.year) * endDate.month + 365 * endDate.year;
+
+		// Calculate the difference in days
+		daysPassed = endDays - startDays;
+
+		return daysPassed;
+	}
+
+	int getDaysInMonth(int month, int year) const {
+		static const int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+		// Adjust for leap years
+		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0))
+			return 29;
+
+		return daysInMonth[month - 1];
+	}
+};
+
+int main() {
+	// Example usage
+	Car car;
+	car.setID(1);
+	car.setBrand("Toyota");
+	car.setType("Sedan");
+	car.setMakeDate(Date(1, 1, 2022));
+	car.setRentDate(Date(1, 2, 2022));
+	car.setReturnDate(Date(10, 2, 2022));
+
+	cout << "Car ID: " << car.getID() << endl;
+	cout << "Brand: " << car.getBrand() << endl;
+	cout << "Type: " << car.getType() << endl;
+	cout << "Make Date: " << car.getMakeDate().day << "/" << car.getMakeDate().month << "/" << car.getMakeDate().year << endl;
+	cout << "Rent Date: " << car.getRentDate().day << "/" << car.getRentDate().month << "/" << car.getRentDate().year << endl;
+	cout << "Return Date: " << car.getReturnDate().day << "/" << car.getReturnDate().month << "/" << car.getReturnDate().year << endl;
+
+	cout << "Pricing: $" << car.calculatePricing() << endl;
+	cout << "Mileage: " << car.calculateMileage() << " miles" << endl;
+
+	return 0;
+}
